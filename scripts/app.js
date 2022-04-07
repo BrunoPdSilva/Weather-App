@@ -53,4 +53,13 @@ cityForm.addEventListener('submit', e => {
     updateCity(city)
         .then(data => updateUI(data))
         .catch(err => console.log(err));
-})
+
+    localStorage.setItem('city', city);
+});
+
+//Check if the user has already informed a city before and updates it.
+if(localStorage.getItem('city')){
+    updateCity(localStorage.getItem('city'))
+    .then(data => updateUI(data))
+    .catch(err => console.log(err));
+};
