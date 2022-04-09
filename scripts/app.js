@@ -32,16 +32,6 @@ const updateUI = (data) => {
 
 };
 
-
-const updateCity = async (city) => {
-
-    const cityDets = await getCity(city);
-    const weather = await getWeather(cityDets.Key);
-
-    return { cityDets, weather };
-
-};
-
 cityForm.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -50,7 +40,7 @@ cityForm.addEventListener('submit', e => {
     cityForm.reset();
 
     //update the ui with new city
-    updateCity(city)
+    forecast.updateCity(city)
         .then(data => updateUI(data))
         .catch(err => console.log(err));
 
@@ -59,7 +49,7 @@ cityForm.addEventListener('submit', e => {
 
 //Check if the user has already informed a city before and updates it.
 if(localStorage.getItem('city')){
-    updateCity(localStorage.getItem('city'))
+    forecast.updateCity(localStorage.getItem('city'))
     .then(data => updateUI(data))
     .catch(err => console.log(err));
 };
